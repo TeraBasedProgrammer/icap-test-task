@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.views import generic
 
 from .models import Product
+from .forms import ProductModelForm
 
 
 class ProductListView(generic.ListView):
@@ -54,7 +55,7 @@ class ProductSearchView(generic.ListView):
 
 class ProductCreateView(generic.CreateView):
     template_name = "admin_crud/product_create.html"
-    form_class = ...
+    form_class = ProductModelForm
     
     def get_success_url(self):
         return reverse("products:products-list")
