@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% load tailwind_filters %}
 
 {% block content %}
 
-<div id="login">
-
+<div id="login" class="w-1/2 border-gray-600 rounded-2xl mx-auto border-2 border-solid p-5">
+<h1 class="mx-auto max-w-max text-xl">Log in</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p}}
-        <button type='submit'>
+        {{ form | crispy }}
+        <button type='submit' class="bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">
             Login
         </button>
     </form>

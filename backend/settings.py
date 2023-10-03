@@ -27,6 +27,8 @@ INSTALLED_APPS = [
 
     # Third-party apps
     "spurl",
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -102,16 +104,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = "static/"
-
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-LOGIN_REDIRECT_URL = ""
-
+LOGIN_REDIRECT_URL = "/products/"
 LOGIN_URL = "/login/"
+LOGOUT_URL = "/logout/"
+LOGOUT_REDIRECT_URL = "/login/"
 
-LOGOUT_REDIRECT_URL = ""
+# Django crispy forms config
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 # Default primary key field type
 
