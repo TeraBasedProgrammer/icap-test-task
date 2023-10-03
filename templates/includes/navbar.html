@@ -1,0 +1,24 @@
+<header>
+  <a href="">
+    <div id="header-logo">
+      <a href="{% url 'products:products-list' %}">Admin panel</a>
+    </div>
+  </a>
+
+  {% if not request.user.is_authenticated %}
+  <div id="header-login">
+    <a href="{% url 'login' %}">
+      Login
+    </a>
+  </div>
+  {% endif %}
+
+  {% if request.user.is_authenticated %}
+  <div id="header-logged">
+    <p>Logged in as: <i>{{ request.user.username }}</i></p>
+    <a href="{% url 'logout' %}" style="text-decoration: underline;">
+      Logout
+    </a>
+  </div>
+  {% endif %}
+</header>

@@ -1,0 +1,15 @@
+{% load static %}
+
+<html>
+  <head>
+    <title>Admin panel</title>
+  </head>
+  <body>
+    <div>
+      {% include "includes/navbar.html" %}
+      {% block content %}
+
+      {% endblock content %}
+    </div>
+  </body>
+</html>
