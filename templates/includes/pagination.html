@@ -1,29 +1,35 @@
 {% load static %}
 {% load spurl %}
 {% if page_obj.has_other_pages %}
-<div class="products-pagination">
-  <nav class="products-pagination-list">
-    {% if page_obj.number|add:-1 > 0 %}
-    <a href="{% spurl query=request.GET set_query='page={{ page_obj.number|add:-1 }}' %}" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
-    </a>
-    {% endif %}
-    {% for p in paginator.page_range %}
-    {% if page_obj.number == p %}
-    <a class="active">{{ p }}</a>
-    {% else %}
-    {% if 'sort_by' in request.get_full_path %}
-    <a href="{% spurl query=request.GET set_query='page={{ p }}' %}">{{ p }}</a>
-    {% else %}
-    <a href="{% spurl query=request.GET set_query='page={{ p }}' %}">{{ p }}</a>
-    {% endif %}
-    {% endif %}
-    {% endfor %}
-    {% if page_obj.number|add:1 <= paginator.num_pages %} <a
-      href="{% spurl query=request.GET set_query='page={{ page_obj.number|add:1 }}' %}" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
+<div class="flex justify-center items-center mt-4">
+  <nav class="bg-white p-2 rounded-lg shadow-md">
+    <ul class="flex space-x-2">
+      {% if page_obj.number|add:-1 > 0 %}
+      <li>
+        <a href="{% spurl query=request.GET set_query='page={{ page_obj.number|add:-1 }}' %}" class="px-3 py-2 text-gray-600 hover:text-blue-500">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
       {% endif %}
-      </a>
+      {% for p in paginator.page_range %}
+      <li>
+        {% if page_obj.number == p %}
+        <span class="px-3 py-2 bg-blue-500 text-white rounded-md">{{ p }}</span>
+        {% else %}
+        <a href="{% spurl query=request.GET set_query='page={{ p }}' %}" class="px-3 py-2 text-gray-600 hover:text-blue-500">
+          {{ p }}
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
+      {% if page_obj.number|add:1 <= paginator.num_pages %}
+      <li>
+        <a href="{% spurl query=request.GET set_query='page={{ page_obj.number|add:1 }}' %}" class="px-3 py-2 text-gray-600 hover:text-blue-500">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
   </nav>
 </div>
 {% endif %}
