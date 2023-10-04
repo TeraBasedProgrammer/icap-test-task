@@ -4,21 +4,24 @@ from django.views import generic
 
 from .models import Product
 from .forms import ProductModelForm
+from .mixins import StaffRequiredMixin
 
 
-class ProductListView(generic.ListView):
+class ProductListView(StaffRequiredMixin, generic.ListView):
     model = Product
     template_name = 'admin_crud/products_list.html'
     context_object_name = 'products'
 
+    paginate_by = 15
 
-class ProductDetailView(generic.DetailView):
+
+class ProductDetailView(StaffRequiredMixin, generic.DetailView):
     model = Product
     template_name = 'admin_crud/product_detail.html'
     context_object_name = 'product'
 
 
-class ProductFilterView(generic.ListView):
+class ProductFilterView(StaffRequiredMixin, generic.ListView):
     context_object_name = 'products'
     template_name = 'admin_crud/products_list.html'
 
@@ -37,7 +40,7 @@ class ProductFilterView(generic.ListView):
         return products
     
 
-class ProductSearchView(generic.ListView):
+class ProductSearchView(StaffRequiredMixin, generic.ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'admin_crud/products_list.html'
@@ -53,7 +56,7 @@ class ProductSearchView(generic.ListView):
         return object_list
     
 
-class ProductCreateView(generic.CreateView):
+class ProductCreateView(StaffRequiredMixin, generic.CreateView):
     template_name = "admin_crud/product_create.html"
     form_class = ProductModelForm
     
@@ -61,7 +64,7 @@ class ProductCreateView(generic.CreateView):
         return reverse("products:products-list")
 
 
-class ProductDeleteView(generic.DeleteView):
+class ProductDeleteView(StaffRequiredMixin, generic.DeleteView):
     template_name = "admin_crud/product_delete.html"
     model = Product
     context_object_name = 'product'
@@ -70,9 +73,9 @@ class ProductDeleteView(generic.DeleteView):
         return reverse("products:products-list")
 
 
-class ProductUpdateView(generic.UpdateView):
+class ProductUpdateView(StaffRequiredMixin, generic.UpdateView):
     template_name = "admin_crud/product_update.html"
-    form_class = ...
+    form_class = ProductModelForm
     model = Product
     context_object_name = 'product'
 

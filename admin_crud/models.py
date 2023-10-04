@@ -7,12 +7,12 @@ from django.core.validators import MinValueValidator
 
 class Product(models.Model):
     class Categories(models.TextChoices):
-        CPU = "PR", _("Процесор")
-        GRAPHICS_CARD = "GC", _("Відеокарта")
-        KEYBOARD = "KB", _("Клавіатура")
-        MOUSE = "MS", _("Миша")
+        CPU = "PR", _("Processor")
+        GRAPHICS_CARD = "GC", _("Graphics card")
+        KEYBOARD = "KB", _("Keyboard")
+        MOUSE = "MS", _("Mouse")
         SSD = "SD", _("SSD")
-        MOTHERBOARD = "MB", _("Материнська плата")
+        MOTHERBOARD = "MB", _("Motherboard")
 
     title = models.CharField(max_length=150, unique=True)
     photo_url = models.URLField()
@@ -21,7 +21,7 @@ class Product(models.Model):
         choices=Categories.choices,
     )
     month_offer = models.BooleanField()
-    is_available = models.BooleanField()
+    in_stock = models.BooleanField()
     is_self_delivered = models.BooleanField()
     description = models.TextField()
 

@@ -5,11 +5,28 @@
 <div class="wrapper w-4/5 mx-auto">
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
-    {% for product in products%}
-    
-    {% endfor %}
     <div class="flex flex-wrap -m-4">
+    {% for product in products %}
       <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+        <a class="block relative h-60 rounded overflow-hidden">
+          <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{ product.photo_url }}">
+        </a>
+        <div class="mt-4 flex flex-col">
+          <h3 class="text-gray-500 text-base tracking-widest title-font mb-1">{{ product.get_category_display }}</h3>
+          <a href="{% url 'products:product-detail' product.pk %}"><h2 class="text-gray-900 title-font text-lg font-medium truncate">{{ product.title }}</h2></a>
+          <p class="mt-1">₴ {{ product.price }}</p>
+          <p class="mt-1">
+            {% if product.in_stock %}
+            In stock ✅
+            {% else %}
+            Out of stock ❌
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+
+    <!--<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
         <a class="block relative h-48 rounded overflow-hidden">
           <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/420x260">
         </a>
@@ -87,10 +104,12 @@
           <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
           <h2 class="text-gray-900 title-font text-lg font-medium">The 400 Blows</h2>
           <p class="mt-1">$18.40</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
+{% include 'includes/pagination.html' %}
 </section>
+
 </div>
 {% endblock content %}

@@ -16,10 +16,14 @@ makemigr:
 migrate:
 	python manage.py migrate
 
+# Create superuser
+createuser:
+	python manage.py createsuperuser
+
 # Fill up the database
-# setupdb:
-# 	python manage.py setup-db
+setupdb:
+	python manage.py setup-db
 
 # Clear the database
-# resetdb:
-# 	python manage.py reset-db
+resetdb:
+	python manage.py reset-db
