@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{ product.title }}</h1>
+        <p class="leading-relaxed mb-4">{{ product.description }}</p>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Category</span>
+          <span class="ml-auto text-gray-900">{{ product.get_category_display }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Month offer</span>
+          <span class="ml-auto text-gray-900">{% if product.month_offer %} ✅ {% else %} ❌ {% endif %}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Self delivery</span>
+          <span class="ml-auto text-gray-900">{% if product.is_self_delivered %} ✅ {% else %} ❌ {% endif %}</span>
+        </div>
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <span class="text-gray-500">In stock</span>
+          <span class="ml-auto text-gray-900">{% if product.in_stock %} ✅ {% else %} ❌ {% endif %}</span>
+        </div>
+        <div class="flex">
+          <span class="title-font font-medium text-2xl text-gray-900">₴ {{ product.price }}</span>
+          <div class="flex ml-auto w-1/2 justify-around">
+            <a href="{% url 'products:product-update' product.id %}"><button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Update</button></a>
+            <a href="{% url 'products:product-delete' product.id %}"><button class="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Delete</button></a>
+          </div>
+        </div>
+      </div>
+      <img alt="ecommerce" class="lg:w-1/2 w-full h-full  h-64 object-cover object-contain rounded" src="{{ product.photo_url }}">
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
