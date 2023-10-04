@@ -22,3 +22,5 @@ class Command(BaseCommand):
                 description=product["description"],
                 price=product["price"],
             )
+        
+        print("Done!")
