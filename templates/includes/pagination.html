@@ -1,7 +1,7 @@
 {% load static %}
 {% load spurl %}
 {% if page_obj.has_other_pages %}
-<div class="produts-pagination">
+<div class="products-pagination">
   <nav class="products-pagination-list">
     {% if page_obj.number|add:-1 > 0 %}
     <a href="{% spurl query=request.GET set_query='page={{ page_obj.number|add:-1 }}' %}" aria-label="Previous">
